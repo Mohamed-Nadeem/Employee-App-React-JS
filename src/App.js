@@ -9,7 +9,7 @@ import './App.css';
 const app = () => {
   return (
     <div className="App">
-     <Navbar bg="dark" variant="dark">
+     <Navbar bg="dark" variant="dark" className="main-navbar">
       <Navbar.Brand href="/">
         <img
           alt=""
@@ -25,7 +25,6 @@ const app = () => {
         <BrowserRouter>
           <Routes>
                 <Route path="/" element={<Views.Dashboard />} />
-                {/* <Route path="newEmployee" component={NewEmployee} /> */}
                 <Route path="/newEmployee" element={<NewEmployee />} />
             </Routes>
         </BrowserRouter>

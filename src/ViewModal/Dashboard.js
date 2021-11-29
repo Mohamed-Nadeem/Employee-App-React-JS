@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import EmployeeDetails from '../DataStore/EmployeeDetails';
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
 import EmployeeTable from '../ComponentLibrary/EmployeeTable';
+import '../App.css';
 
 export default class Dashboard extends Component {
     state = {
         empDetails: []
     };
     
-    // update the state based on the local storage to upate with the latest records
+    // update the state based on the local storage to update with the latest records
     componentDidMount() {
         let employeeDetails = JSON.parse(localStorage.getItem('employees'));
         if (employeeDetails) {
@@ -47,7 +48,7 @@ export default class Dashboard extends Component {
     render () {
         return (
             <div style={{ height: 'auto', backgroundColor: '#343A40' }}>
-                <Navbar bg="primary" variant="dark">
+                <Navbar bg="primary" variant="dark" className="navbar">
                     <Navbar.Brand href="#home">EMPLOYEE DASHBOARD</Navbar.Brand>
                     <Nav className="mr-auto">
                     <Nav.Link href="/newEmployee">Add New Employee</Nav.Link>

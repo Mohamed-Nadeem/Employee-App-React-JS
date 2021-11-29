@@ -5,3 +5,21 @@ html, body, #app, #app>div {
   height: 100% !important;
   background-color: #43494E !important;
 }
+.employee-form-div {
+  display: inline-flex;
+  border-color: #AD8174 !important;
+  border: 5px solid;
+  border-radius: 7px;
+  padding: -37px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+nav.navbar.navbar.navbar-expand.navbar-dark.bg-primary {
+  background-color: #8EE4AF !important;
+}
+nav.main-navbar.navbar.navbar-expand.navbar-dark.bg-dark {
+  background-color: #E87661 !important;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: #28a745;
+}

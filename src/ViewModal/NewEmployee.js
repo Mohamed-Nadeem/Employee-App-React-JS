@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EmployeeForm from '../ComponentLibrary/NewEmployeeForm';
 import { Navbar, Nav } from 'react-bootstrap';
+import '../App.css';
 
 export default class NewEmployee extends Component {
     state = {
@@ -18,20 +19,15 @@ export default class NewEmployee extends Component {
     render () {
         return (
             <div>
-                <Navbar bg="primary" variant="dark">
+                <Navbar bg="primary" variant="dark" className="navbar">
                     <Navbar.Brand href="#AddNewEmployee">ADD NEW EMPLOYEE</Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link href="/">View Dashboard</Nav.Link>
                     </Nav>
                 </Navbar>
-                <h3 className="center" 
-                    style={{ 
-                        paddingBottom: '2%',
-                        paddingTop: '2%',
-                        backgroundColor: 'black',
-                        color: 'white' }}>
-                            Please add the details below:</h3>
-                <EmployeeForm empDetails={this.state.empDetails}/>
+                <div className="employee-form-div">
+                    <EmployeeForm empDetails={this.state.empDetails}/>
+                </div>
             </div>
         );
     }
