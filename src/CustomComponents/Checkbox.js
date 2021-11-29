@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Checkbox = ({ label, visited, valid, onChange, value,
+const checkbox = ({ label, visited, valid, onChange, value,
     validationMessage }) => {
     const onValueChange = React.useCallback(
       () => {
@@ -26,4 +26,4 @@ const Checkbox = ({ label, visited, valid, onChange, value,
     );
   };
 
-  export default Checkbox;
+  export default checkbox;

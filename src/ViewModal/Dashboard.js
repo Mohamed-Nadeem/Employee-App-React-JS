@@ -8,9 +8,10 @@ export default class Dashboard extends Component {
     state = {
         empDetails: []
     };
-    
+
     // update the state based on the local storage to update with the latest records
     componentDidMount() {
+        this.checkifUserloggedIn();
         let employeeDetails = JSON.parse(localStorage.getItem('employees'));
         if (employeeDetails) {
             this.setState({
@@ -21,6 +22,13 @@ export default class Dashboard extends Component {
             this.setState({
                 empDetails: EmployeeDetails
             })
+        }
+    }
+
+    // Check if the user is logged in or not
+    checkifUserloggedIn = () => {
+        if (!sessionStorage.getItem("LoggedIn")) {
+            window.location.href = "/login";
         }
     }
 

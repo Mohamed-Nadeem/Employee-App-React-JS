@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DropDown = ({ label, value, valid, visited, options,
+const dropDown = ({ label, value, valid, visited, options,
     onChange, onBlur, onFocus, validationMessage, }) => {
     const invalid = !valid && visited;
     return (
@@ -23,4 +23,4 @@ const DropDown = ({ label, value, valid, visited, options,
     )
   }
 
-  export default DropDown;
+  export default dropDown;

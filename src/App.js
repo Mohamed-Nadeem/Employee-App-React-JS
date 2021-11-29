@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import Logo from './logo.svg';
 import Views from './ViewModal/index';
-import NewEmployee from './ViewModal/NewEmployee';
 import './App.css';
 
 const app = () => {
@@ -25,7 +24,9 @@ const app = () => {
         <BrowserRouter>
           <Routes>
                 <Route path="/" element={<Views.Dashboard />} />
-                <Route path="/newEmployee" element={<NewEmployee />} />
+                <Route path="/newEmployee" element={<Views.NewEmployee />} />
+                <Route path="/login" element={<Views.LoginPage />} />
+                <Route path="/signUp" element={<Views.SignUp />} />
             </Routes>
         </BrowserRouter>
      </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = (fieldProps) => {
+const input = (fieldProps) => {
     const {
       fieldType, label, value, visited, touched, valid,
       onChange, onBlur, onFocus, validationMessage, 
@@ -22,4 +22,4 @@ const Input = (fieldProps) => {
     );
   };
 
-  export default Input;
+  export default input;
