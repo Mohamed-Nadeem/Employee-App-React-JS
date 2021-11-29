@@ -18,28 +18,19 @@ export default class loginPage extends Component {
    constructor(props) {
         super(props);
         this.state = {
-            users: []
         };
     }
 
     componentDidMount() {
         let userDetails = JSON.parse(localStorage.getItem('users'));
-        console.log("Test to see data ", userDetails);
-        if (userDetails) {
-            this.setState({
-                users: userDetails
-            })
-        } else {
+        if (!userDetails) {
             localStorage.setItem('users', JSON.stringify(Users));
-            this.setState({
-                users: Users
-            })
         }
     }
 
     // Function to handle the submit and validate the user credentials
     handleSubmit = (data, event) => {
-        const userDetails = this.state.users;
+        const userDetails = JSON.parse(localStorage.getItem('users'));;
         const userEmail = data.email;
         const userPassword = data.password;
         for (var i = 0; i < userDetails.length; i++) {
@@ -49,14 +40,16 @@ export default class loginPage extends Component {
                 window.location.href = "/";
             } else if (userDetails[i].email === userEmail && userDetails[i].password !== userPassword) {
                 alert("The entered password is incorrect.");
-            } else 
+            } else {
                 alert("Sorry, we could not find your details. Please Sign Up.");
+            }
         }
     };
 
-    // signUp = () => {
-    //     window.location.href = "/signUp";
-    // }
+    //redirect to signUp page
+    signUpPage = () => {
+        window.location.href = "signUp";
+    }   
 
     render () {
         return (
@@ -65,14 +58,12 @@ export default class loginPage extends Component {
                     <CssBaseline />
                     <Container fixed>
                         <Form
-                        id="newEmployeeForm"
-                        name="newEmployeeForm"
                         onSubmit={this.handleSubmit}
                         initialValues={{
                             email: "", password: ""
                         }}
                         render={(formRenderProps) => (
-                            <form onSubmit={formRenderProps.onSubmit} className="form-comp" name="empForm">
+                            <form onSubmit={formRenderProps.onSubmit} className="form-comp">
                             <h1 className="form-heading">Login</h1>
 
                             <Field
@@ -95,6 +86,7 @@ export default class loginPage extends Component {
                         </Form>
                     </Container>
                 </div>
+                <input type="button" name="SignUp" value="Sign Up" className="signUpbtn" onClick={this.signUpPage} />
             </div>
         );
     };
