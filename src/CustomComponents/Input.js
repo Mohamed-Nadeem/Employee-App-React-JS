@@ -2,7 +2,7 @@ import React from 'react';
 
 const input = (fieldProps) => {
     const {
-      fieldType, label, value, visited, touched, valid,
+      fieldType, label, value, visited, valid,
       onChange, onBlur, onFocus, validationMessage, 
     } = fieldProps;
     const invalid = !valid && visited;
