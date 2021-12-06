@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EmployeeDetails from '../DataStore/EmployeeDetails';
-import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import EmployeeTable from '../ComponentLibrary/EmployeeTable';
 import '../App.css';
 
@@ -32,6 +32,13 @@ export default class Dashboard extends Component {
         }
     }
 
+    // method to log out
+    logOut = (event) => {
+        sessionStorage.removeItem("LoggedIn");
+        event.preventDefault();
+        window.location.href = "/login";
+    }
+
     // method for the deletion of an employee
     deleteEmployee = (id) => {
         const employeeList = this.state.empDetails.slice();
@@ -60,6 +67,7 @@ export default class Dashboard extends Component {
                     <Navbar.Brand href="#home">EMPLOYEE DASHBOARD</Navbar.Brand>
                     <Nav className="mr-auto">
                     <Nav.Link href="/newEmployee">Add New Employee</Nav.Link>
+                    <Button variant="success" onClick={this.logOut}>Log Out</Button>
                     </Nav>
                     <Form inline>
                     <FormControl type="text" placeholder="Find Employee By Name" className="mr-sm-2" onChange={(e) => this.findEmployee(e)} />
