@@ -1725,7 +1725,7 @@
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.0.tgz"
   "version" "2.11.0"
 
-"@progress/kendo-licensing@^1.0.1":
+"@progress/kendo-licensing@^1.0.1", "@progress/kendo-licensing@^1.2.1":
   "integrity" "sha512-j17Mvl1wxdF8C+v6iokssV7tdaeWqCr8zkczTr5jfTe6Fg9DEbFfvt0bl8UnTLg41dc5R14dp8ZVhdnS+sdDrg=="
   "resolved" "https://registry.npmjs.org/@progress/kendo-licensing/-/kendo-licensing-1.2.1.tgz"
   "version" "1.2.1"

@@ -14,12 +14,11 @@ html, body, #app, #app>div {
   margin-top: 25px;
   margin-bottom: 25px;
 }
-input.signUpbtn {
+input#signup-button {
   background-color: #d33a29;
   color: white;
-  border: 1px solid;
 }
-input.signUpbtn:hover {
+input#signup-button:hover {
   background-color: #bf6359;
 }
 
