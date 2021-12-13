@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import EmployeeDetails from '../DataStore/EmployeeDetails';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import EmployeeTable from '../ComponentLibrary/EmployeeTable';
+import DeletePopUp from '../CustomComponents/DeletePopUp';
 import '../App.css';
 
 export default class Dashboard extends Component {
     state = {
-        empDetails: []
+        empDetails: [],
+        modalShow: false,
+        empId: ''
     };
 
     // update the state based on the local storage to update with the latest records
@@ -39,12 +42,21 @@ export default class Dashboard extends Component {
         window.location.href = "/login";
     }
 
+    //method for the pop up
+    showDeleteModal = (id) => {
+        this.setState({
+            modalShow: true,
+            empId: id
+        })
+    }
+
     // method for the deletion of an employee
     deleteEmployee = (id) => {
         const employeeList = this.state.empDetails.slice();
         employeeList.splice(id, 1);
         this.setState({
-            empDetails: employeeList
+            empDetails: employeeList,
+            modalShow: false
         });
         localStorage.setItem('employees', JSON.stringify(employeeList));
     }
@@ -73,7 +85,12 @@ export default class Dashboard extends Component {
                     <FormControl type="text" placeholder="Find Employee By Name" className="mr-sm-2" onChange={(e) => this.findEmployee(e)} />
                     </Form>
                 </Navbar>
-                <EmployeeTable empdetails={this.state.empDetails} click={(id) => this.deleteEmployee(id)} />
+                <EmployeeTable empdetails={this.state.empDetails} click={(id) => this.showDeleteModal(id)} />
+                <DeletePopUp
+                    show={this.state.modalShow}
+                    onHide={() => this.setState({modalShow: false})}
+                    deleteClick={() => this.deleteEmployee(this.state.empId)}
+                />
             </div>
         );
     }
