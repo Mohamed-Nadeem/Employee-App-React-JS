@@ -2,43 +2,43 @@ const employeeDetails = [
     {
         name: "Sam Anderson",
         age: "25",
-        dob: "05/10/1990",
+        dob: "1990-10-05",
         designation: "Accountant"
     },
     {
         name: "Charlie Evans",
         age: "32",
-        dob: "18/04/1985",
+        dob: "2000-04-18",
         designation: "HR-Executive"
     },
     {
         name: "Robert Downey",
         age: "28",
-        dob: "22/12/1988",
+        dob: "2008-12-22",
         designation: "Tech-Specialist"
     },
     {
         name: "James May",
         age: "38",
-        dob: "01/02/1980",
+        dob: "2013-02-01",
         designation: "IT-Administrator"
     },
     {
         name: "Lionel Ronaldo",
         age: "21",
-        dob: "07/10/1998",
+        dob: "1998-10-07",
         designation: "Accountant"
     },
     {
         name: "Kristen Stewart",
         age: "25",
-        dob: "05/03/1995",
+        dob: "2008-03-05",
         designation: "HR-Exeutive"
     },
     {
         name: "Jeremy Clarkson",
         age: "55",
-        dob: "09/11/1969",
+        dob: "2015-11-09",
         designation: "General Manager"
     }
 ]

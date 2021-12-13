@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import './NewEmployeeForm.scss';
 import { Form, Field } from "@progress/kendo-react-form";
+import Alert from 'react-bootstrap/Alert';
 import Input from '../CustomComponents/Input';
 import DropDown from '../CustomComponents/DropDown';
 
@@ -18,6 +19,9 @@ const requiredValidator = (value) => {
 }
 
 const employeeForm = (props) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [showSuccess, setShow] = useState(false);
+    
     const designations = [ 
         "Accountant",
         "HR-Executive",
@@ -28,6 +32,7 @@ const employeeForm = (props) => {
 
     // Handle the form on sumbit event for storing new details
     const handleSubmit = (data, event) => {
+        setShow(false);
         const addEmployeeToList = [
             ...props.empDetails,
             {
@@ -39,57 +44,65 @@ const employeeForm = (props) => {
         ]
         localStorage.setItem('employees', JSON.stringify(addEmployeeToList));
         event.preventDefault();
-        alert("New Employee has been Added!");
+        setShow(true);
         window.location.href = "/";
     };
 
    return (
-       <div style={{ height: 'auto', backgroundColor: '#343A40', paddingTop: '5%', paddingBottom: '5%' }}>
-        <CssBaseline />
-        <Container fixed>
-            <Form
-            id="newEmployeeForm"
-            name="newEmployeeForm"
-            onSubmit={handleSubmit}
-            initialValues={{
-                employeeName: "", age: "", designations: "", dob: ""
-            }}
-            render={(formRenderProps) => (
-                <form onSubmit={formRenderProps.onSubmit} className="form-comp" name="empForm">
-                <h1 className="form-heading">Add New Employee</h1>
+       <div>
+            { showSuccess && 
+                    <Alert variant="success">
+                        New Employee has been Added!
+                    </Alert>
+            }
+           <div style={{ height: 'auto', backgroundColor: '#343A40', paddingTop: '5%', paddingBottom: '5%' }}>
+            <CssBaseline />
+            <Container fixed>
+                <Form
+                id="newEmployeeForm"
+                name="newEmployeeForm"
+                onSubmit={handleSubmit}
+                initialValues={{
+                    employeeName: "", age: "", designations: "", dob: ""
+                }}
+                render={(formRenderProps) => (
+                    <form onSubmit={formRenderProps.onSubmit} className="form-comp" name="empForm">
+                    <h1 className="form-heading">Add New Employee</h1>
 
-                <Field
-                    label="Name:"
-                    name="employeeName"
-                    fieldType="text"
-                    component={Input}
-                    validator={[requiredValidator, nameValidator]} />
-                <Field
-                    label="Age:"
-                    name="age"
-                    fieldType="number"
-                    component={Input}
-                    validator={[requiredValidator, ageValidator]} />
-                <Field 
-                    label="Designation:"
-                    name="designation"
-                    component={DropDown}
-                    options={designations}
-                    validator={requiredValidator} />
-                <Field
-                    label="Date of Birth:"
-                    name="dob"
-                    fieldType="date"
-                    component={Input}
-                    validator={[requiredValidator]} />
-                
-                <button disabled={!formRenderProps.allowSubmit}>
-                    Submit
-                </button>
-                </form>
-            )}>
-            </Form>
-        </Container>
+                    <Field
+                        label="Name:"
+                        name="employeeName"
+                        fieldType="text"
+                        component={Input}
+                        validator={[requiredValidator, nameValidator]} />
+                    <Field
+                        label="Age:"
+                        name="age"
+                        fieldType="number"
+                        component={Input}
+                        validator={[requiredValidator, ageValidator]} />
+                    <Field 
+                        label="Designation:"
+                        name="designation"
+                        component={DropDown}
+                        options={designations}
+                        validator={requiredValidator} />
+                    <Field
+                        label="Employment Date:"
+                        name="dob"
+                        fieldType="date"
+                        format= "dd/MM/yyyy"
+                        component={Input}
+                        validator={[requiredValidator]} />
+                    
+                    <button disabled={!formRenderProps.allowSubmit}>
+                        Submit
+                    </button>
+                    </form>
+                )}>
+                </Form>
+            </Container>
+        </div>
        </div>
    );
 }

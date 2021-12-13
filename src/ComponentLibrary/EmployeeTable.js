@@ -9,7 +9,7 @@ const employeeTable = (props) => {
                     <th>#</th>
                     <th>Name</th>
                     <th>Age</th>
-                    <th>Date of Birth</th>
+                    <th>Employment Date</th>
                     <th>Designation</th>
                     <th>Delete Employee</th>
                 </tr>

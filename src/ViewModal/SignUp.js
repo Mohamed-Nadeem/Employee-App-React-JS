@@ -3,6 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import '../ComponentLibrary/NewEmployeeForm.scss';
 import { Form, Field } from "@progress/kendo-react-form";
+import Alert from 'react-bootstrap/Alert';
 import Input from '../CustomComponents/Input';
 import Users from '../DataStore/Users';
 
@@ -21,7 +22,9 @@ export default class signUp extends Component {
    constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            alertshowSuccess : false,
+            alertshowEmail : false
         };
     }
 
@@ -41,11 +44,17 @@ export default class signUp extends Component {
 
     // Function to handle the submit and validate the user credentials
     handleSubmit = (data, event) => {
+        this.setState({
+            alertshowSuccess : false,
+            alertshowEmail : false
+        });
         const userDetails = this.state.users;
         const userEmail = data.email;
         for (var i = 0; i < userDetails.length; i++) {
             if (userDetails[i].email === userEmail) {
-                alert("The following email ID is in the system.");
+                this.setState({
+                    alertshowEmail: true
+                })
             } else {
                 const addUserToList = [
                     ...this.state.users,
@@ -57,7 +66,9 @@ export default class signUp extends Component {
                 ]
                 localStorage.setItem('users', JSON.stringify(addUserToList));
                 event.preventDefault();
-                alert("User has been added successfully!");
+                this.setState({
+                    alertshowSuccess: true
+                })
                 window.location.href = "/login";
             }
         }
@@ -65,44 +76,56 @@ export default class signUp extends Component {
 
     render () {
         return (
-            <div className="employee-form-div">
+            <div>
+                 { this.state.alertshowEmail && 
+                    <Alert variant="warning">
+                        The following email ID is in the system.
+                    </Alert>
+                }
+                { this.state.alertshowSuccess && 
+                    <Alert variant="success">
+                       User has been added successfully!
+                    </Alert>
+                }
+                 <div className="employee-form-div">
                 <div style={{ height: 'auto', backgroundColor: '#343A40', paddingTop: '5%', paddingBottom: '5%' }}>
-                    <CssBaseline />
-                    <Container fixed>
-                        <Form
-                        onSubmit={this.handleSubmit}
-                        initialValues={{
-                            name:"", email: "", password: ""
-                        }}
-                        render={(formRenderProps) => (
-                            <form onSubmit={formRenderProps.onSubmit} className="form-comp">
-                            <h1 className="form-heading">Sign Up</h1>
+                        <CssBaseline />
+                        <Container fixed>
+                            <Form
+                            onSubmit={this.handleSubmit}
+                            initialValues={{
+                                name:"", email: "", password: ""
+                            }}
+                            render={(formRenderProps) => (
+                                <form onSubmit={formRenderProps.onSubmit} className="form-comp">
+                                <h1 className="form-heading">Sign Up</h1>
 
-                            <Field
-                                label="Name:"
-                                name="name"
-                                fieldType="text"
-                                component={Input}
-                                validator={[requiredValidator, nameValidator]} />
-                            <Field
-                                label="Email:"
-                                name="email"
-                                fieldType="text"
-                                component={Input}
-                                validator={[requiredValidator, emailValidator]} />
-                            <Field
-                                label="Password:"
-                                name="password"
-                                fieldType="password"
-                                component={Input}
-                                validator={[requiredValidator]} />
-                            <button disabled={!formRenderProps.allowSubmit}>
-                                Submit Details
-                            </button>
-                            </form>
-                        )}>
-                        </Form>
-                    </Container>
+                                <Field
+                                    label="Name:"
+                                    name="name"
+                                    fieldType="text"
+                                    component={Input}
+                                    validator={[requiredValidator, nameValidator]} />
+                                <Field
+                                    label="Email:"
+                                    name="email"
+                                    fieldType="text"
+                                    component={Input}
+                                    validator={[requiredValidator, emailValidator]} />
+                                <Field
+                                    label="Password:"
+                                    name="password"
+                                    fieldType="password"
+                                    component={Input}
+                                    validator={[requiredValidator]} />
+                                <button disabled={!formRenderProps.allowSubmit}>
+                                    Submit Details
+                                </button>
+                                </form>
+                            )}>
+                            </Form>
+                        </Container>
+                    </div>
                 </div>
             </div>
         );
