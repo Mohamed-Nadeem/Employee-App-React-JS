@@ -2,7 +2,14 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import {Button} from 'react-bootstrap';
 
-const deletePopUp = (props) => {
+const logoutPopUp = (props) => {
+
+       // method to log out
+      const logOut = (e) => {
+        sessionStorage.removeItem("LoggedIn");
+        e.preventDefault();
+        window.location.href = "/login";
+    }
 
     return(
         <Modal
@@ -13,20 +20,20 @@ const deletePopUp = (props) => {
         >
         <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-           Delete Record
+           Logout
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <p>
-            Do you want to delete the employee record permanently?
+            Do you want to logout?
             </p>
         </Modal.Body>
         <Modal.Footer>
             <Button variant="secondary" onClick={props.onHide}>Close</Button>
-            <Button variant="warning" onClick={() => props.deleteClick()}>Delete</Button>
+            <Button variant="warning" onClick={(e) => logOut(e)}>Logout</Button>
         </Modal.Footer>
     </Modal>
     );
 }
 
-export default deletePopUp;
+export default logoutPopUp;

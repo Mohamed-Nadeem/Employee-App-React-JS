@@ -3,12 +3,14 @@ import EmployeeDetails from '../DataStore/EmployeeDetails';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import EmployeeTable from '../ComponentLibrary/EmployeeTable';
 import DeletePopUp from '../CustomComponents/DeletePopUp';
+import LogoutPopUp from '../CustomComponents/LogoutPopup';
 import '../App.css';
 
 export default class Dashboard extends Component {
     state = {
         empDetails: [],
         modalShow: false,
+        logoutModalShow: false,
         empId: ''
     };
 
@@ -35,18 +37,18 @@ export default class Dashboard extends Component {
         }
     }
 
-    // method to log out
-    logOut = (event) => {
-        sessionStorage.removeItem("LoggedIn");
-        event.preventDefault();
-        window.location.href = "/login";
-    }
-
-    //method for the pop up
+    //method for the Delete pop up
     showDeleteModal = (id) => {
         this.setState({
             modalShow: true,
             empId: id
+        })
+    }
+
+    //method for the logOut pop up
+    showLogoutModal = (e) => {
+        this.setState({
+            logoutModalShow: true,
         })
     }
 
@@ -79,10 +81,10 @@ export default class Dashboard extends Component {
                     <Navbar.Brand href="#home">EMPLOYEE DASHBOARD</Navbar.Brand>
                     <Nav className="mr-auto">
                     <Nav.Link href="/newEmployee">Add New Employee</Nav.Link>
-                    <Button variant="success" onClick={this.logOut}>Log Out</Button>
+                    <Button variant="success" onClick={(e) => this.showLogoutModal(e)}>Log Out</Button>
                     </Nav>
                     <Form inline>
-                    <FormControl type="text" placeholder="Find Employee By Name" className="mr-sm-2" onChange={(e) => this.findEmployee(e)} />
+                    <FormControl type="text" placeholder="Find Employee By Name" className="mr-sm-2" onChange={(e) => this.findEmployee(e)} /> 
                     </Form>
                 </Navbar>
                 <EmployeeTable empdetails={this.state.empDetails} click={(id) => this.showDeleteModal(id)} />
@@ -90,6 +92,10 @@ export default class Dashboard extends Component {
                     show={this.state.modalShow}
                     onHide={() => this.setState({modalShow: false})}
                     deleteClick={() => this.deleteEmployee(this.state.empId)}
+                />
+                <LogoutPopUp
+                    show={this.state.logoutModalShow}
+                    onHide={() => this.setState({logoutModalShow: false})}
                 />
             </div>
         );
